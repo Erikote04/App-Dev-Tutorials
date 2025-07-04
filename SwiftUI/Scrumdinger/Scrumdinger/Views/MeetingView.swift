@@ -27,17 +27,7 @@ struct MeetingView: View {
                 Circle()
                     .strokeBorder(lineWidth: 24)
                 
-                HStack {
-                    Text("Speaker 1 of 3")
-                    
-                    Spacer()
-                    
-                    Button(action: {}) {
-                        Image(systemName: "forward.fill")
-                    }
-                    .frame(width: 44, height: 44)
-                    .accessibilityLabel("Next speaker")
-                }
+                MeetingFooter(speakers: scrumTimer.speakers, skipAction: scrumTimer.skipSpeaker)
             }
         }
         .padding()
