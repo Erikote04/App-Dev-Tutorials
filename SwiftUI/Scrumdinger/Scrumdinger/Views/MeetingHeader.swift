@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import ThemeKit
+import TimerKit
 
 struct MeetingHeader: View {
     let secondsElapsed: Int
     let secondsRemaining: Int
+    let theme: Theme
     
     private var totalSeconds: Int {
         secondsElapsed + secondsRemaining
@@ -27,6 +30,7 @@ struct MeetingHeader: View {
     var body: some View {
         VStack {
             ProgressView(value: 5, total: 15)
+                .progressViewStyle(ScrumProgressViewStyle(theme: theme))
             
             HStack {
                 VStack(alignment: .leading) {
@@ -39,15 +43,17 @@ struct MeetingHeader: View {
                 VStack(alignment: .trailing) {
                     Text("Seconds Remaining").font(.caption)
                     Label("\(secondsRemaining)", systemImage: "hourglass.bottomhalf.fill")
+                        .labelStyle(.trailingIcon)
                 }
             }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Time remaining")
         .accessibilityValue("\(minutesRemaining) minutes")
+        .padding([.top, .horizontal])
     }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    MeetingHeader(secondsElapsed: 60, secondsRemaining: 180)
+    MeetingHeader(secondsElapsed: 60, secondsRemaining: 180, theme: .bubblegum)
 }
