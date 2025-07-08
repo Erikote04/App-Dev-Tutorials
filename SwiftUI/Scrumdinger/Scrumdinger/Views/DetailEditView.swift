@@ -61,11 +61,11 @@ struct DetailEditView: View {
             }
             
             Section(header: Text("Attendees")) {
-                ForEach(scrum.attendees) { attendee in
+                ForEach(attendees) { attendee in
                     Text(attendee.name)
                 }
                 .onDelete { indicies in
-                    scrum.attendees.remove(atOffsets: indicies)
+                    attendees.remove(atOffsets: indicies)
                 }
                 
                 HStack {
@@ -74,7 +74,7 @@ struct DetailEditView: View {
                     Button {
                         withAnimation {
                             let attendee = Attendee(name: attendeeName)
-                            scrum.attendees.append(attendee)
+                            attendees.append(attendee)
                             attendeeName = ""
                         }
                     } label: {
@@ -112,7 +112,6 @@ struct DetailEditView: View {
         } content: { wrapper in
             ErrorView(errorWrapper: wrapper)
         }
-
     }
     
     private func saveEdits() throws {
@@ -121,11 +120,9 @@ struct DetailEditView: View {
         scrum.attendees = attendees
         scrum.theme = theme
         
-        
         if isCreatingScrum {
             context.insert(scrum)
         }
-        
         
         try context.save()
     }
