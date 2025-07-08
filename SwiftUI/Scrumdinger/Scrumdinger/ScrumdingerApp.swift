@@ -5,6 +5,7 @@
 //  Created by Erik Sebastian de Erice Jerez on 3/7/25.
 //
 
+import SwiftData
 import SwiftUI
 
 @main
@@ -13,7 +14,8 @@ struct ScrumdingerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ScrumsView(scrums: $scrums)
+            ScrumsView()
         }
+        .modelContainer(for: DailyScrum.self)
     }
 }

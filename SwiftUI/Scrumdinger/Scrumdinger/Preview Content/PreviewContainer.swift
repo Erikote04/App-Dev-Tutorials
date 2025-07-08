@@ -22,5 +22,5 @@ struct DailyScrumSampleData: PreviewModifier {
 }
 
 extension PreviewTrait where T == Preview.ViewTraits {
-    @MainActor static var dailyScrumSampleData: Self = .modifier(DailyScrumSampleData())
+    @MainActor static var dailyScrumsSampleData: Self = .modifier(DailyScrumSampleData())
 }
