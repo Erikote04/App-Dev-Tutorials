@@ -47,7 +47,7 @@ struct DetailEditView: View {
                     
                     Button {
                         withAnimation {
-                            let attendee = DailyScrum.Attendee(name: attendeeName)
+                            let attendee = Attendee(name: attendeeName)
                             scrum.attendees.append(attendee)
                             attendeeName = ""
                         }
