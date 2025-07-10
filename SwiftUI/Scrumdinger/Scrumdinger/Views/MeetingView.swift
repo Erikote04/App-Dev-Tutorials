@@ -32,7 +32,7 @@ struct MeetingView: View {
                 
                 Spacer()
                 
-                MeetingTimerView(speakers: scrumTimer.speakers, theme: scrum.theme)
+                MeetingTimerView(speakers: scrumTimer.speakers, isRecording: isRecording, theme: scrum.theme)
                 
                 Spacer()
                 
