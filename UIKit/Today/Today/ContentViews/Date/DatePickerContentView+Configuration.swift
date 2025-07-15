@@ -10,6 +10,7 @@ import UIKit
 extension DatePickerContentView: UIContentView {
     struct Configuration: UIContentConfiguration {
         var date = Date.now
+        var onChange: (Date) -> Void = { _ in }
 
         func makeContentView() -> UIView & UIContentView {
             return DatePickerContentView(self)
