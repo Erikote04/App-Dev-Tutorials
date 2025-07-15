@@ -10,6 +10,7 @@ import UIKit
 extension TextFieldContentView: UIContentView {
     struct Configuration: UIContentConfiguration {
         var text: String? = ""
+        var onChange: (String) -> Void = { _ in }
         
         func makeContentView() -> any UIView & UIContentView {
             return TextFieldContentView(self)

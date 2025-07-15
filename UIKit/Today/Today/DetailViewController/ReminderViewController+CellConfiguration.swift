@@ -23,9 +23,10 @@ extension ReminderViewController {
     }
     
     func titleConfiguration(for cell: UICollectionViewListCell, with title: String?) -> TextFieldContentView.Configuration {
-        var configuration = TextFieldContentView.Configuration()
-        configuration.text = title
-        return configuration
+        var contentConfiguration = cell.textFieldConfiguration()
+        contentConfiguration.text = title
+        contentConfiguration.onChange = { [weak self] in self?.workingReminder.title = $0 }
+        return contentConfiguration
     }
     
     func dateConfiguration(for cell: UICollectionViewListCell, with date: Date) -> DatePickerContentView.Configuration {
