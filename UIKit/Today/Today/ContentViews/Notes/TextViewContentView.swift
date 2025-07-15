@@ -25,6 +25,7 @@ class TextViewContentView: UIView {
         super.init(frame: .zero)
         addPinnedSubview(textView, height: 200)
         textView.backgroundColor = nil
+        textView.delegate = self
         textView.font = UIFont.preferredFont(forTextStyle: .body)
     }
 
@@ -35,5 +36,12 @@ class TextViewContentView: UIView {
     func configure(configuration: UIContentConfiguration) {
         guard let configuration = configuration as? Configuration else { return }
         textView.text = configuration.text
+    }
+}
+
+extension TextViewContentView: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard let configuration = configuration as? TextViewContentView.Configuration else { return }
+        configuration.onChange(textView.text)
     }
 }
