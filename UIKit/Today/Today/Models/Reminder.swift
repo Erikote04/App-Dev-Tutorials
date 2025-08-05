@@ -5,6 +5,7 @@
 //  Created by Erik Sebastian de Erice Jerez on 10/7/25.
 //
 
+import EventKit
 import Foundation
 
 struct Reminder: Equatable, Identifiable {
@@ -13,6 +14,20 @@ struct Reminder: Equatable, Identifiable {
     var dueDate: Date
     var notes: String? = nil
     var isComplete: Bool = false
+}
+
+extension Reminder {
+    init(with ekReminder: EKReminder) throws {
+        guard let dueDate = ekReminder.alarms?.first?.absoluteDate else {
+            throw TodayError.reminderHasNoDueDate
+        }
+        
+        self.id = ekReminder.calendarItemIdentifier
+        self.title = ekReminder.title
+        self.dueDate = dueDate
+        self.notes = ekReminder.notes
+        self.isComplete = ekReminder.isCompleted
+    }
 }
 
 #if DEBUG
