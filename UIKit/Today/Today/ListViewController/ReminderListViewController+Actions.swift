@@ -35,7 +35,6 @@ extension ReminderListViewController {
         
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true)
-        
     }
     
     @objc func didCancelAdd(_ sender: UIBarButtonItem) {
