@@ -18,7 +18,7 @@ struct Reminder: Equatable, Identifiable {
 
 extension Reminder {
     init(with ekReminder: EKReminder) throws {
-        guard let dueDate = ekReminder.alarms?.first?.absoluteDate else {
+        guard let dueDate = ekReminder.dueDateComponents?.date else {
             throw TodayError.reminderHasNoDueDate
         }
         
