@@ -28,7 +28,7 @@ extension Quake: Decodable {
         case detail
     }
     
-    init(from decoder: any Decoder) throws {
+    init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let rawMagnitude = try? values.decode(Double.self, forKey: .magnitude)
         let rawPlace = try? values.decode(String.self, forKey: .place)
