@@ -31,4 +31,9 @@ struct EarthquakesTests {
         let decodedSeconds = decoded.quakes[0].time.timeIntervalSince1970
         #expect(expectedSeconds == decodedSeconds)
     }
+    
+    @Test func quakeDetailsDecoder() throws {
+        let decoded = try JSONDecoder().decode(QuakeLocation.self, from: testDetail_hv72783692)
+        #expect(decoded.latitude == 19.2189998626709)
+    }
 }
