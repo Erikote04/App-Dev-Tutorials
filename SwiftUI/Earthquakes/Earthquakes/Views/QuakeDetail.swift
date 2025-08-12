@@ -10,6 +10,9 @@ import SwiftUI
 struct QuakeDetail: View {
     let quake: Quake
     
+    @Environment(QuakesProvider.self) private var provider
+    @State private var location: QuakeLocation? = nil
+    
     var body: some View {
         VStack {
             QuakeMagnitude(quake: quake)
@@ -21,9 +24,18 @@ struct QuakeDetail: View {
             Text("\(quake.time.formatted())")
                 .foregroundStyle(.secondary)
             
-            if let location = quake.location {
+            if let location {
                 Text("Latitude: \(location.latitude.formatted(.number.precision(.fractionLength(3))))")
                 Text("Longitude: \(location.longitude.formatted(.number.precision(.fractionLength(3))))")
+            }
+        }
+        .task {
+            if location == nil {
+                if let quakeLocation = quake.location {
+                    location = quakeLocation
+                } else {
+                    location = try? await provider.getLocation(for: quake)
+                }
             }
         }
     }
@@ -31,4 +43,5 @@ struct QuakeDetail: View {
 
 #Preview {
     QuakeDetail(quake: Quake.preview)
+        .environment(QuakesProvider(client: QuakeClient(downloader: TestDownloader())))
 }
